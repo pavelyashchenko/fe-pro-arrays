@@ -4,7 +4,24 @@
   фишка задания сделать свою реализацию, чтобы понять, как он работает под капотом. Для перебора советую использовать for цикл
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
-function forEach(array, callback) {}
+
+const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'm', 'p', 's'];
+const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+function forEach(arr, callback) {
+  for (let index = 0; index < arr.length; index += 1) {
+    const item = arr[index];
+
+    callback(item);
+  }
+}
+
+function consoleLogCallback(item) {
+  console.log(item);
+}
+
+forEach(nums, consoleLogCallback);
+forEach(letters, consoleLogCallback);
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
  вот документация https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
@@ -12,7 +29,24 @@ function forEach(array, callback) {}
  Фишка задания сделать свою реализацию, чтобы понять, как он работает под капотом. Для перебора советую использовать for цикл
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
-function map(array, callback) {}
+function map(arr, callback) {
+  const result = [];
+
+  for (let index = 0; index < arr.length; index += 1) {
+    const item = arr[index];
+    const transformedItem = callback(item, index, arr);
+    result.push(transformedItem);
+  }
+
+  return result;
+}
+
+function multiplication(item) {
+  return item * 5;
+}
+
+const mappedArray = map(nums, multiplication);
+console.log(mappedArray);
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
  вот документация https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
@@ -20,7 +54,31 @@ function map(array, callback) {}
  Фишка задания сделать свою реализацию, чтобы понять, как он работает под капотом. Для перебора советую использовать for цикл
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
-function filter(array, callback) {}
+const goods = [
+  {
+    name: 'Apple',
+    price: 20,
+  },
+  {
+    name: 'Peach',
+    price: 22,
+  },
+  {
+    name: 'Melon',
+    price: 50,
+  },
+  {
+    name: 'Grapes',
+    price: 30,
+  },
+];
+
+function filter(item, index, arr) {
+  return item.price >= 500 && item.price <= 700;
+}
+
+const result = goods.filter(filter);
+console.log(result);
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива, 3 аргумент изначальный вариант
  вот документация https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
@@ -31,7 +89,15 @@ function filter(array, callback) {}
  Фишка задания сделать свою реализацию, чтобы понять, как он работает под капотом. Для перебора советую использовать for цикл
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
-function reduce(array, callback, initialValue) {}
+function callback(acumulator, currentGoods) {
+  if (currentGoods.price >= 30 && currentGoods.price <= 40) {
+    acumulator.push(currentGoods.name);
+  }
+  return acumulator;
+}
+
+const goodsName = goods.reduce(callback, []);
+console.log(goodsName);
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
  вот документация https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
@@ -39,7 +105,10 @@ function reduce(array, callback, initialValue) {}
  Фишка задания сделать свою реализацию, чтобы понять, как он работает под капотом. Для перебора советую использовать for цикл
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
-function some(array, callback) {}
+const resultPrice = phones.some(function (item) {
+  return item.price >= 1700;
+});
+console.log(resultPrice);
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
  вот документация https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
@@ -47,7 +116,10 @@ function some(array, callback) {}
  Фишка задания сделать свою реализацию, чтобы понять, как он работает под капотом. Для перебора советую использовать for цикл
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
-function every(array, callback) {}
+const resultPricesoftDrink = softDrink.every(function (item) {
+  return item.price < 1700;
+});
+console.log(resultPricesoftDrink);
 
 // Эту часть не удаляем, она важна для проверки результата
 module.exports = {
